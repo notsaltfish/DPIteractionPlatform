@@ -2,6 +2,7 @@ package com.dpip.controller;
 
 import com.dpip.po.*;
 import com.dpip.service.*;
+import com.dpip.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class DoctorController {
 
     @RequestMapping("login")
     public String login(Doctor doctor, Model model, HttpServletRequest request){
-
+        doctor.setPwd(MD5Util.MD5(doctor.getPwd()));
         System.out.println(doctor.getId()+"  "+doctor.getPwd());
         Doctor doctor1 =  doctorService.login(doctor);
         String result ="/index.jsp";

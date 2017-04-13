@@ -5,6 +5,7 @@ import com.dpip.service.CommentService;
 import com.dpip.service.DoctorService;
 import com.dpip.service.LeaveMessageService;
 import com.dpip.service.PatientService;
+import com.dpip.util.MD5Util;
 import com.dpip.util.Page;
 import com.dpip.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class PatientController  {
 
     @RequestMapping("/patient/login")
     public String login(Model model,Patient patient,HttpServletRequest request ){
+        patient.setPwd(MD5Util.MD5(patient.getPwd()));
         List<Patient> datas=patientService.select(null,patient);
         if(datas.size()==0){
             model.addAttribute("login",-1);

@@ -3,6 +3,7 @@ package com.dpip.service.impl;
 import com.dpip.mapper.DoctorMapper;
 import com.dpip.po.Doctor;
 import com.dpip.service.DoctorService;
+import com.dpip.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public int update(Doctor doctor) {
-
+        if(doctor.getPwd()!=null&&doctor.getPwd().length()<16){
+            doctor.setPwd(MD5Util.MD5(doctor.getPwd()));
+        }
         return doctorMapper.update(doctor);
     }
 

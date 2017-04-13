@@ -2,6 +2,7 @@ package com.dpip.controller;
 
 import com.dpip.po.*;
 import com.dpip.service.*;
+import com.dpip.util.MD5Util;
 import com.dpip.util.Page;
 import com.dpip.util.ResponseData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class AdminController {
 
     @RequestMapping("/admin/login")
     public String login(Model model,Admin admin,HttpServletRequest request ){
+        admin.setPwd(MD5Util.MD5(admin.getPwd()));
         List<Admin> datas=adminService.select(admin);
         if(datas.size()==0){
             model.addAttribute("login",-1);

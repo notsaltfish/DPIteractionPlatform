@@ -3,6 +3,7 @@ package com.dpip.service.impl;
 import com.dpip.mapper.DiseaseTrackMapper;
 import com.dpip.mapper.PatientMapper;
 import com.dpip.po.DiseaseTrack;
+import com.dpip.util.MD5Util;
 import com.dpip.util.Page;
 import com.dpip.po.Patient;
 import com.dpip.service.PatientService;
@@ -62,6 +63,9 @@ public class PatientServiceImpl implements PatientService {
             diseaseTrack.setIcdName(patient.getIcdName());
             diseaseTrack.setPatientId(patient.getId());
             diseaseTrackMapper.add(diseaseTrack);
+        }
+        if(patient.getPwd()!=null&&patient.getPwd().length()<16){
+            patient.setPwd(MD5Util.MD5(patient.getPwd()));
         }
         return patientMapper.update(patient);
     }

@@ -3,6 +3,7 @@ package com.dpip.service.impl;
 import com.dpip.mapper.*;
 import com.dpip.po.*;
 import com.dpip.service.AdminService;
+import com.dpip.util.MD5Util;
 import com.dpip.util.Page;
 import com.dpip.util.ResponseData;
 import com.github.pagehelper.PageHelper;
@@ -33,6 +34,9 @@ public class AdminServiceImpl implements AdminService{
 
     @Override
     public int update(Admin admin) {
+        if(admin.getPwd()!=null&&admin.getPwd().length()<16){
+            admin.setPwd(MD5Util.MD5(admin.getPwd()));
+        }
         return adminMapper.update(admin);
     }
 
@@ -111,7 +115,7 @@ public class AdminServiceImpl implements AdminService{
             Patient patient = new Patient();
             if(name!=null&&name.equals("active")){
                 patient.setId(Integer.parseInt(id));
-                patient.setPwd("123456");
+                patient.setPwd(MD5Util.MD5("123456"));
                 patientMapper.update(patient);
             }else if(name!=null&&name.equals("disable")){
                 patient.setId(Integer.parseInt(id));
@@ -123,7 +127,7 @@ public class AdminServiceImpl implements AdminService{
             Doctor doctor = new Doctor();
             doctor.setId(Integer.parseInt(id));
             if(name!=null&&name.equals("active")){
-                doctor.setPwd("123456");
+                doctor.setPwd(MD5Util.MD5("123456"));
                 doctorMapper.update(doctor);
             }else if(name!=null&&name.equals("disable")){
                 doctor.setPwd(null);
