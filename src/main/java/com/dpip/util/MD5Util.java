@@ -95,7 +95,7 @@ public class MD5Util {
      */
     public static void main(String[] args) {
         //String pwd = MD5Util.getPwd("abc");
-        String pwd2 = MD5Util.MD5("123456");
+        String pwd2 = MD5Util.MD5("111111");
         //System.out.println(pwd);
         System.out.println(pwd2);
     }

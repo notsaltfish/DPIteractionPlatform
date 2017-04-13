@@ -114,6 +114,7 @@ $(function(){
             result=false;
         }else{
             $("#pwdTips2").hide();
+            result=true;
         }
         return result;
     })

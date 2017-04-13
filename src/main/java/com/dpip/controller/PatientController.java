@@ -208,6 +208,9 @@ public class PatientController  {
     @ResponseBody
     @RequestMapping("/patient/checkpassword")
     public int updatePassword(HttpServletRequest request,String oldPwd){
+        if(oldPwd!=null){
+            oldPwd = MD5Util.MD5(oldPwd);
+        }
         Patient patient = (Patient) request.getSession().getAttribute("user");
         int result = 0;
         if (patient != null && patient.getPwd().equals(oldPwd)) {

@@ -22,7 +22,7 @@ body {
   <tr>
     <td height="59" background="/images/top.gif"><table width="99%" border="0" cellspacing="0" cellpadding="0">
       <tr>
-        <td width="70%"><img src="/images/logo.gif" border="0" /></td>
+        <td width="70%"><img src="/images/logo.png" border="0" /></td>
         <td width="30%" align="right" style="font-size:12px;vertical-align:top;">欢迎您${user.name}|<a href="/admin/logout" target="_top" >退出系统</a></td>
       </tr>
     </table></td>

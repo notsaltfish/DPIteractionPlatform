@@ -207,6 +207,9 @@ public class DoctorController {
     @ResponseBody
     @RequestMapping("checkpassword")
     public int updatePassword(HttpServletRequest request,String oldPwd){
+        if(oldPwd!=null){
+            oldPwd = MD5Util.MD5(oldPwd);
+        }
         Doctor doctor = (Doctor) request.getSession().getAttribute("user");
         int result = 0;
         if (doctor != null && doctor.getPwd().equals(oldPwd)) {

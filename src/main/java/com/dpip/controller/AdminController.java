@@ -60,6 +60,9 @@ public class AdminController {
     @ResponseBody
     @RequestMapping("/admin/checkpassword")
     public int checkOldPassword(HttpServletRequest request,String pwd){
+        if(pwd!=null){
+            pwd = MD5Util.MD5(pwd);
+        }
         Admin admin = (Admin) request.getSession().getAttribute("user");
         int i = 0;
         if(pwd!=null&&pwd.equals(admin.getPwd())){
