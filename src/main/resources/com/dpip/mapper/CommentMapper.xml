@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.CommentMapper" >
+    <resultMap type="com.dpip.po.Comment" id="CommentRM">
+         <id property="id" column="id"/>
+        <result property="content" column="content"/>
+         <result property="departmentId" column="department_id"/>
+         <result property="departmentName" column="dp_name"/>
+         <result property="disadvantage" column="disadvantage"/>
+         <result property="advantage" column="advantage"/>
+         <result property="commitDate" column="commit_date"/>
+         <result property="doctorId" column="doctor_id"/>
+         <result property="patientId" column="patient_id"/>
+
+    </resultMap>
+  <select id="select" parameterType="com.dpip.po.Comment" resultMap="CommentRM">
+      select c.* ,d.dp_name from dp_commitment c LEFT  join dp_department d
+      on c.department_id = d.id  where 1=1
+
+      <if test="doctorId !=null"> and doctor_id= #{doctorId}</if>
+      <if test="departmentId !=null"> and department_id=#{departmentId}</if>
+    </select>
+
+
+<insert id="add" parameterType="com.dpip.po.Comment" >
+    insert into dp_commitment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="content != null" > content,</if>
+        <if test="departmentId != null" > department_id,</if>
+        <if test="disadvantage != null" >disadvantage,</if>
+        <if test="advantage != null" >advantage,</if>
+        <if test="commitDate != null" >commit_date,</if>
+        <if test="doctorId != null" >doctor_id,</if>
+        <if test="patientId != null" >patient_id,</if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="content != null" >
+            #{content,jdbcType=VARCHAR},
+        </if>
+        <if test="departmentId != null" >
+            #{departmentId,jdbcType=TINYINT},
+        </if>
+        <if test="disadvantage != null" >
+            #{disadvantage,jdbcType=VARCHAR},
+        </if>
+        <if test="advantage != null" >
+            #{advantage,jdbcType=VARCHAR},
+        </if>
+        <if test="commitDate != null" >
+            #{commitDate,jdbcType=DATE},
+        </if>
+        <if test="doctorId != null" >
+            #{doctorId,jdbcType=TINYINT},
+        </if>
+        <if test="patientId != null" >
+            #{patientId,jdbcType=TINYINT},
+        </if>
+
+    </trim>
+  </insert>
+
+
+</mapper>

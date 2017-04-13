@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.DiseaseTrackMapper" >
+    <resultMap type="com.dpip.po.DiseaseTrack" id="DiseaseTrackRM">
+
+       <id property="id" column="id"/>
+        <result property="patientId" column="p_id"/>
+        <result property="date" column="date"/>
+        <result property="description" column="description"/>
+        <result property="icdName" column="icd_name"/>
+    </resultMap>
+   <select id="select" parameterType="com.dpip.po.DiseaseTrack" resultMap="DiseaseTrackRM">
+         select *  from dp_dise_track where 1=1
+        <if test="id !=null"> and id =#{id}</if>
+        <if test="patientId !=null"> and p_id =#{patientId}</if>
+    </select>
+
+    <insert id="add" parameterType="com.dpip.po.DiseaseTrack">
+      insert into dp_dise_track
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="patientId != null" > p_id,</if>
+            <if test="date != null" > date,</if>
+            <if test="description != null" >description,</if>
+            <if test="icdName != null" >icd_name,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="patientId != null" >
+                #{patientId,jdbcType=TINYINT},
+            </if>
+            <if test="date != null" >
+                #{date,jdbcType=DATE},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="icdName != null" >
+                #{icdName,jdbcType=VARCHAR},
+            </if>
+
+
+        </trim>
+    </insert>
+
+
+</mapper>

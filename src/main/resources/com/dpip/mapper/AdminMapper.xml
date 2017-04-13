@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.AdminMapper" >
+    <resultMap type="com.dpip.po.Admin" id="AdminRM">
+         <id property="id" column="id"/>
+         <result property="name" column="name"/>
+         <result property="pwd" column="pwd"/>
+    </resultMap>
+
+  <select id="select" parameterType="com.dpip.po.Admin" resultMap="AdminRM">
+      SELECT * from dp_admin
+    WHERE 1=1
+         <if test="id !=null"> and id =${id} </if>
+         <if test="pwd !=null"> and pwd=#{pwd}</if>
+
+    </select>
+
+
+
+<!--<insert id="add" parameterType="com.dpip.po.Admin" >
+    insert into dp_admin
+
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="name != null" > name,</if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="name != null" >
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="hpDate != null" >
+            #{hpDate,jdbcType=DATE},
+        </if>
+    </trim>
+  </insert>-->
+    <update id="update" parameterType="com.dpip.po.Admin">
+      update dp_admin
+      <set>
+          <if test="name !=null"> name=#{name},</if>
+
+            <if test="pwd !=null"> pwd=#{pwd},</if>
+
+        </set>
+      where id=#{id}
+    </update>
+ <!--   <delete id="delete" parameterType="int">
+        delete from dp_admin where id in
+        <foreach collection="list" item="o" separator="," open="(" close=")">
+            #{o}
+        </foreach>
+    </delete>-->
+
+</mapper>

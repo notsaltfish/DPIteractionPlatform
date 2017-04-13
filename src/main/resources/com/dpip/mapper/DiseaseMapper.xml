@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.DiseaseMapper" >
+    <resultMap type="com.dpip.po.Disease" id="DiseaseRM">
+        <id property="id" column="id"/>
+       <result property="icdCode" column="icd_code"/>
+        <result property="fzm" column="fzm"/>
+        <result property="name" column="name_cn"/>
+    </resultMap>
+   <select id="selectByName" parameterType="com.dpip.po.Disease" resultMap="DiseaseRM">
+         select *  from dp_icd_disease where 1=1
+        <if test="name !=null"> and name_cn like '%${name}%'</if>
+
+
+    </select>
+
+    <select id="getCount" parameterType="com.dpip.po.Disease" resultType="int">
+        select count(*) from dp_icd_disease
+        WHERE 1=1
+        <if test="name !=null"> and name_cn like '%${name}%'</if>
+        <!--<if test="id !=null"> and id=#{id}</if>-->
+    </select>
+
+    <update id="update" parameterType="com.dpip.po.Disease">
+        update dp_icd_disease
+        <set>
+            <if test="name !=null">name_cn=#{name},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="add" parameterType="com.dpip.po.Disease">
+        insert into  dp_icd_disease
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" > name_cn,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+    </insert>
+
+    <delete id="delete" parameterType="com.dpip.po.Disease">
+        delete  from dp_icd_disease where
+        id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.MedicineMapper" >
+    <resultMap type="com.dpip.po.MedicineHistory" id="MedicineRM">
+         <id property="id" column="id"/>
+         <result property="medicineName" column="m_name"/>
+
+    </resultMap>
+  <select id="selectByName" parameterType="com.dpip.po.Medicine" resultMap="MedicineRM">
+        select *  from dp_medi where 1=1
+         <if test="medicineName !=null">
+          and m_name like '%${medicineName}%'
+         </if>
+    </select>
+
+    <select id="getCount" parameterType="com.dpip.po.Medicine" resultType="int">
+        select count(*) from dp_medi
+        WHERE 1=1
+        <if test="medicineName !=null">
+            and m_name like '%${medicineName}%'
+        </if>
+        <!--<if test="id !=null"> and id=#{id}</if>-->
+    </select>
+
+
+
+    <update id="update" parameterType="com.dpip.po.Medicine">
+        update dp_medi
+        <set>
+            <if test="medicineName !=null">m_name=#{medicineName},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="add" parameterType="com.dpip.po.Medicine" >
+        insert into  dp_medi
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="medicineName != null" > m_name,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="medicineName != null" >
+                #{medicineName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+    </insert>
+
+    <delete id="delete" parameterType="com.dpip.po.Medicine">
+        delete  from dp_medi where
+        id=#{id}
+    </delete>
+</mapper>

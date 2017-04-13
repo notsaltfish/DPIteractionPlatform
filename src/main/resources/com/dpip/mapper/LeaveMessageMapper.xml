@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.LeaveMessageMapper" >
+    <resultMap type="com.dpip.po.LeaveMessage" id="LeaveMessageRM">
+         <id property="id" column="id"/>
+        <result property="content" column="content"/>
+         <result property="departmentId" column="department_id"/>
+         <result property="departmentName" column="dp_name"/>
+         <result property="fatherId" column="father_id"/>
+         <result property="content" column="content"/>
+         <result property="doctorId" column="doctor_id"/>
+         <result property="patientId" column="patient_id"/>
+         <result property="status" column="status"/>
+         <result property="leaveDate" column="leave_date"/>
+         <result property="reply" column="reply"/>
+
+    </resultMap>
+  <select id="select" parameterType="com.dpip.po.LeaveMessage" resultMap="LeaveMessageRM">
+      select * from dp_leave_message   where 1=1
+
+      <if test="doctorId !=null"> and doctor_id= #{doctorId}</if>
+      <if test="patientId !=null"> and patient_id= #{patientId}</if>
+      <if test="status !=null"> and status= #{status}</if>
+      <if test="id !=null"> and id= #{id}</if>
+      order by leave_date
+      limit #{recordsNum},#{recordsSize}
+    </select>
+
+
+<insert id="add" parameterType="com.dpip.po.LeaveMessage" >
+    insert into dp_leave_message
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="content != null" > content,</if>
+        <if test="departmentId != null" > department_id,</if>
+        <if test="fatherId != null" >father_id,</if>
+        <if test="doctorId != null" >doctor_id,</if>
+        <if test="patientId != null" >patient_id,</if>
+        <if test="status != null" >status,</if>
+        <if test="leaveDate != null" >leave_date,</if>
+        <if test="reply != null" >reply,</if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="content != null" >
+            #{content,jdbcType=VARCHAR},
+        </if>
+        <if test="departmentId != null" >
+            #{departmentId,jdbcType=TINYINT},
+        </if>
+        <if test="fatherId != null" >
+            #{fatherId,jdbcType=TINYINT},
+        </if>
+        <if test="doctorId != null" >
+            #{doctorId,jdbcType=TINYINT},
+        </if>
+        <if test="patientId != null" >
+            #{patientId,jdbcType=TINYINT},
+        </if>
+        <if test="status != null" >
+            #{status,jdbcType=VARCHAR},
+        </if>
+        <if test="leaveDate != null" >
+            #{leaveDate,jdbcType=DATE},
+        </if>
+    </trim>
+  </insert>
+
+    <update id="update" parameterType="com.dpip.po.LeaveMessage">
+        update dp_leave_message
+        <set>
+            <if test="status !=null"> status=#{status},</if>
+
+            <if test="content !=null"> content=#{content},</if>
+            <if test="reply !=null"> reply=#{reply},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

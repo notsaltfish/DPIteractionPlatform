@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dpip.mapper.DoctorMapper" >
+    <resultMap type="com.dpip.po.Doctor" id="DoctorRM">
+       <id property="id" column="id"/>
+        <result property="name" column="d_name"/>
+        <result property="departmentId" column="department_id"/>
+        <result property="pwd" column="pwd"/>
+        <result property="role" column="role"/>
+        <result property="sex" column="sex"/>
+        <result property="title" column="title"/>
+        <result property="introduction" column="introduction"/>
+        <result property="image" column="image"/>
+        <!--虚拟字段 -->
+        <result property="departmentName" column="department_name"/>
+    </resultMap>
+   <select id="select" parameterType="com.dpip.po.Doctor" resultMap="DoctorRM">
+
+       SELECT doc.* ,dp.dp_name AS department_name FROM dp_doctor doc
+       LEFT JOIN dp_department dp ON
+       doc.department_id = dp.id
+       WHERE 1=1
+        <if test="id !=null"> and doc.id=#{id}</if>
+        <if test="pwd !=null"> and pwd=#{pwd}</if>
+
+    </select>
+
+    <select id="getCount" parameterType="com.dpip.po.Doctor" resultType="int">
+        select count(*) from dp_doctor
+        WHERE 1=1
+        <if test="id !=null"> and id=#{id}</if>
+        <if test="pwd !=null"> and pwd=#{pwd}</if>
+        <if test="name !=null"> and d_name like '%${name}%'</if>
+        <if test="departmentId !=null"> and department_id=#{departmentId}</if>
+        <!--<if test="id !=null"> and id=#{id}</if>-->
+    </select>
+
+    <select id="selectList" parameterType="com.dpip.po.Doctor" resultMap="DoctorRM">
+        SELECT doc.* ,dp.dp_name AS department_name FROM dp_doctor doc
+        LEFT JOIN dp_department dp ON
+        doc.department_id = dp.id
+        where 1=1
+        <if test="id !=null"> and doc.id=#{id}</if>
+        <if test="pwd !=null"> and pwd=#{pwd}</if>
+        <if test="name !=null"> and doc.d_name like '%${name}%'</if>
+        <if test="departmentId !=null"> and doc.department_id=#{departmentId}</if>
+    </select>
+
+    <update id="update" parameterType="com.dpip.po.Doctor">
+      update dp_doctor
+      <set>
+          <if test="name !=null">d_name=#{name},</if>
+          <if test="departmentId !=null">department_id=#{departmentId},</if>
+          <if test="pwd !=null">pwd=#{pwd},</if>
+          <if test="role !=null">role=#{role},</if>
+          <if test="sex !=null">sex=#{sex},</if>
+          <if test="title !=null">title=#{title},</if>
+          <if test="introduction !=null">introduction=#{introduction},</if>
+
+      </set>
+        where id=#{id}
+    </update>
+
+    <update id="disable" parameterType="com.dpip.po.Doctor">
+        update dp_doctor
+        <set>
+          pwd =null
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="add" parameterType="com.dpip.po.Doctor">
+        insert into dp_doctor
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="name != null" > d_name,</if>
+            <if test="departmentId != null" > department_id,</if>
+            <if test="sex != null" >sex,</if>
+            <if test="role != null" >role,</if>
+            <if test="title != null" >title,</if>
+            <if test="introduction != null" >introduction,</if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="departmentId != null" >
+                #{departmentId,jdbcType=TINYINT},
+            </if>
+            <if test="sex != null" >
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null" >
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null" >
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+
+        </trim>
+
+    </insert>
+
+</mapper>

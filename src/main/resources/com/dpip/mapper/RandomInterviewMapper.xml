@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+    <mapper namespace="com.dpip.mapper.RandomInterviewMapper" >
+
+    <resultMap type="com.dpip.po.RandomInterview" id="RandomInterviewRM">
+         <id property="id" column="id"/>
+         <result property="score" column="score"/>
+         <result property="comment" column="comment"/>
+         <result property="patientId" column="p_id"/>
+         <result property="doctorId" column="d_id"/>
+         <result property="interviewDate" column="in_date"/>
+         <result property="interviewerId" column="in_id"/>
+         <result property="advice" column="advice"/>
+    </resultMap>
+    <resultMap id="SVORM" type="com.dpip.vo.StatisticValueObject">
+        <result property="name" column="d_name"></result>
+        <result property="value" column="d_count"></result>
+
+    </resultMap>
+
+    <!-- 根据病人id查询病人的用药记录-->
+  <select id="select" parameterType="int" resultMap="RandomInterviewRM">
+      /*  select *  from dp_medi_his where
+         p_id=#{id}*/
+
+    </select>
+
+    <select id="selectRecentMonth" resultMap="RandomInterviewRM">
+        SELECT * FROM dp_random_inter WHERE DATE_SUB(in_date, INTERVAL 30 DAY)   &lt;= DATE(CURDATE())
+
+    </select>
+
+    <select id="selectInterviewerTaskAmount" resultMap="SVORM">
+        SELECT inter_id,d.d_name,COUNT(*) d_count FROM dp_random_inter r
+        LEFT JOIN dp_doctor d ON d.id = r.inter_id
+        WHERE DATE_SUB(in_date, INTERVAL 30 DAY)
+        &lt;= DATE(CURDATE())
+        GROUP BY r.inter_id
+        ORDER BY d_count
+        LIMIT 0,7
+
+    </select>
+
+    <select id="selectHpStatistic" resultMap="SVORM">
+
+        SELECT COUNT(*)d_count,DATE_FORMAT(hp_date, '%m-%d')d_name
+        FROM dp_patient WHERE
+        DATE_SUB(hp_date, INTERVAL 12 DAY) &lt;= DATE(CURDATE())
+        GROUP BY hp_date
+
+    </select>
+
+
+    <select id="getCount" parameterType="com.dpip.po.RandomInterview" resultType="int">
+       <!-- select count(*) from dp_patient
+        WHERE 1=1
+        <if test="pName !=null"> and p_name like  '%${pName}%' </if>
+        <if test="departmentId !=null"> and department_id=#{departmentId}</if>
+        &lt;!&ndash;<if test="id !=null"> and id=#{id}</if>&ndash;&gt;-->
+    </select>
+
+
+<insert id="add" parameterType="com.dpip.po.RandomInterview" >
+    insert into dp_random_inter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="score != null" > score,</if>
+        <if test="comment != null" > comment,</if>
+        <if test="patientId != null" >p_id,</if>
+        <if test="doctorId != null" >d_id,</if>
+        <if test="interviewDate != null" >in_date,</if>
+        <if test="interviewerId != null" >in_date,</if>
+        <if test="advice != null" >advice,</if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="score != null" >
+            #{score,jdbcType=TINYINT},
+        </if>
+        <if test="comment != null" >
+            #{comment,jdbcType=VARCHAR},
+        </if>
+        <if test="patientId != null" >
+            #{patientId,jdbcType=TINYINT},
+        </if>
+        <if test="doctorId != null" >
+            #{doctorId,jdbcType=TINYINT},
+        </if>
+        <if test="interviewDate != null" >
+            #{interviewDate,jdbcType=DATE},
+        </if>
+        <if test="interviewerId != null" >
+            #{interviewerId,jdbcType=TINYINT},
+        </if>
+        <if test="advice != null" >
+            #{advice,jdbcType=VARCHAR},
+        </if>
+    </trim>
+  </insert>
+    <update id="update" parameterType="com.dpip.po.RandomInterview">
+     <!-- update dp_patient
+      <set>
+          <if test="pName !=null"> p_name=#{pName},</if>
+
+            <if test="phone !=null"> phone=#{phone},</if>
+
+            <if test="description !=null"> description=#{description},</if>
+
+            <if test="departmentId !=null"> department_id=#{departmentId},</if>
+
+            <if test="sex !=null"> sex=#{sex},</if>
+
+            <if test="age !=null"> age=#{age},</if>
+
+            <if test="icdCode !=null"> icd_code=#{icdCode},</if>
+
+            <if test="pType !=null"> p_type=#{pType},</if>
+
+        </set>
+      where id=#{id}-->
+    </update>
+
+
+</mapper>
