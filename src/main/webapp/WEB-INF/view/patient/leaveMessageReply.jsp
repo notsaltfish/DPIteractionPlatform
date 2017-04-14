@@ -37,7 +37,7 @@
 
     <c:forEach items="${dataLists}" var="o" varStatus="status">
     <div <c:if test="${status.index%2==0}">class="panel  panel-primary" </c:if>
-         <c:if test="${status.index%2==0}">class="panel  panel-info" </c:if>>
+         <c:if test="${status.index%2!=0}">class="panel  panel-info" </c:if>>
         <div class="panel-body">
             <div id="readedTab" style="display: none">&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-default">已读</span><br>
             </div>

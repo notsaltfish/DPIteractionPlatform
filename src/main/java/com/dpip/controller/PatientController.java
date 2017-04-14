@@ -35,6 +35,10 @@ public class PatientController  {
 
     @RequestMapping("/patient/login")
     public String login(Model model,Patient patient,HttpServletRequest request ){
+        if(patient.getPwd()==null||patient.getId()==null){
+            model.addAttribute("login",-1);
+            return "/login2.jsp";
+        }
         patient.setPwd(MD5Util.MD5(patient.getPwd()));
         List<Patient> datas=patientService.select(null,patient);
         if(datas.size()==0){

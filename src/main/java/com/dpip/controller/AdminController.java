@@ -31,6 +31,10 @@ public class AdminController {
 
     @RequestMapping("/admin/login")
     public String login(Model model,Admin admin,HttpServletRequest request ){
+       if(admin.getId()==null||admin.getPwd()==null){
+           model.addAttribute("login",-1);
+           return  "/login2.jsp";
+       }
         admin.setPwd(MD5Util.MD5(admin.getPwd()));
         List<Admin> datas=adminService.select(admin);
         if(datas.size()==0){

@@ -45,6 +45,7 @@
 		<div class="login-wrap">
 
 			<div class="login-html">
+				<img src="/images/mini-logo.png" style="position: relative;bottom: 45px;right: 20px"/>
 				<font style="position: relative;bottom: 50px;font-size: 25px">医患互动信息系统登录</font>
 				<form action="/doctor/login" method="post">
 				<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登录</label>

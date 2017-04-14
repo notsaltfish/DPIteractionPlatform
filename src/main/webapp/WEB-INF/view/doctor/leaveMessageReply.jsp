@@ -67,8 +67,8 @@
             <input type="hidden" name="id" value="${o.id}"/>
         <div  class="row">
             <div class="col-sm-12">
-                <div class="controls control-group">
-                    <textarea cols="60"  rows="10" type="text"  placeholder="回复" name="reply" class="input-xlarge"></textarea>
+                <div class="col-sm-8">
+                    <textarea cols="20"  rows="10" type="text"  placeholder="回复" name="reply" class="form-control"></textarea>
                     <p class="help-block"></p>
 
                 </div>
@@ -78,12 +78,12 @@
         </div>
             <div class="control-group">
                 <!-- Button -->
-                <div class="controls">
+                <div class="controls" style="position: relative;left: 20px">
                     <button class="btn btn-success" type="submit">提交</button>
                 </div>
             </div>
         </form>
-
+<br><br><br><br>
 </div>
 <script>
 

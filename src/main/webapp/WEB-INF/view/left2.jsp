@@ -47,7 +47,7 @@ a{text-decoration:none;}
 <c:if test="${role=='doctor'}">
 		<dl class="system_log">
 			<dt onClick="changeImage()">患者管理<img src="/images/left/select_xl01.png"></dt>
-			<dd class="first_dd"><a href="/patient/list?pType=1" target="mainFrame">住院患者</a></dd>
+			<dd class="first_dd"><a href="/patient/list?pType=1" id="patientHref" target="mainFrame">住院患者</a></dd>
 			<dd><a href="/patient/list?pType=2" target="mainFrame">门诊患者</a></dd>
 			<!--
 			<dd><a href="#">消费记录</a></dd>
@@ -59,7 +59,7 @@ a{text-decoration:none;}
 		<dl class="custom">
 			<dt onClick="changeImage()">患者随访<img src="/images/left/select_xl01.png"></dt>
 			<c:if test="${role!='admin'}">
-			<dd class="first_dd"><a href="/randominterview/uninter" target="mainFrame">随访记录</a></dd>
+				<dd class="first_dd"><a href="/randominterview/uninter"  target="mainFrame">随访记录</a></dd>
 			</c:if>
 			<dd><a href="/randominterview/statistic" target="mainFrame">随访统计</a></dd>
 			<!--

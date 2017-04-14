@@ -38,19 +38,69 @@
 
 
             <label for="title" class="  col-sm-1 control-label">名称</label>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <input type="text" class="form-control" id="name" placeholder="名称">
             </div>
             <label for="description" class="col-sm-1 control-label">科室</label>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <select class="form-control" name="departmentId">
                     <option>请选择</option>
                 </select>
             </div>
-
+            <div class="col-sm-4">
             <button id="query" class="btn btn-info">查询</button>
             <button id="add" class="btn btn-info">添加</button>
+            <button id="export" class="btn btn-info">导出EXCEL</button>
+            </div>
         </div>
+        <form action="/excelExceport/patient" target="_self" method="post" style="display: none">
+            <input id="hiddenName" name="name"/>
+            <input  id = "hiddenDepartmentId" name="departmentId"/>
+            <input id ="hiddenPage" name="page"/>
+            <input id="hiddenPageSize" name="pageSize"/>
+
+        </form>
+        <iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
+        <script>
+
+            $("#export").click(function(){
+
+                    name=$('#name').val();
+                    departmentId=$('select[name="departmentId"]').val();
+                    page=parseInt($("#currentPage").text());
+                    pageSize=$('select[name="pagenation"]').val();
+
+                if(departmentId=="请选择"){
+                    departmentId=null;
+                };
+              //  $("form").attr("target","rfFrame")
+                $("#hiddenName").val(name);
+                $("#hiddenDepartmentId").val(departmentId);
+                $("#hiddenPage").val(page);
+                $("#hiddenPageSize").val(pageSize);
+                $("form").submit();
+                var ptype="${pType}"
+                setTimeout("load();",3000)
+               // $( parent.frames['leftFrame'].document).find('#patientHref2').click()
+                //  setTimeout("history.back()",3000)
+                //history.back()
+                /* $.ajax({
+                     url:"/excelExceport/patient",
+                     type:"POST",
+                     dataType:"json",
+                     data:defaultArg,
+                     success:function(data){
+
+                     }
+                 });*/
+
+            })
+
+            function load(){
+                //$( parent.frames['leftFrame'].document).find('#patientHref2').click();
+                parent.location.reload();
+            }
+        </script>
 
     </div>
 
