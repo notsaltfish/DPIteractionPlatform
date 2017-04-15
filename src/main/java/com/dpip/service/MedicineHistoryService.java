@@ -1,6 +1,7 @@
 package com.dpip.service;
 
 import com.dpip.po.MedicineHistory;
+import com.dpip.util.ResponseData;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface MedicineHistoryService {
 
     public int add(MedicineHistory medicineHistory);
 
+    public int getCount(MedicineHistory medicineHistory);
 
+   public  ResponseData<MedicineHistory> selectAjax(Integer id);
 }

@@ -6,7 +6,7 @@ import com.dpip.po.Disease;
 import java.util.List;
 
 /**
- * Created by chenyong on 2017/4/5.
+ * Created by X on 2017/4/5.
  */
 public interface DepartmentMapper {
     public List<Department> selectByName(Department department);

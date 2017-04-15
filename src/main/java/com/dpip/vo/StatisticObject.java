@@ -2,7 +2,7 @@ package com.dpip.vo;
 import java.util.List;
 
 /**
- * Created by chenyong on 2017-04-09.
+ * Created by X on 2017-04-09.
  */
 public class StatisticObject {
     private String title;

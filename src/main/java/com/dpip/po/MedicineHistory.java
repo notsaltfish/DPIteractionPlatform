@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * Created by chenyong on 2017/4/7.
+ * Created by X on 2017/4/7.
  */
 public class MedicineHistory {
 

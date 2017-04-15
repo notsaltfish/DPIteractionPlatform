@@ -1,112 +1,103 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!doctype html>
+<html lang="zh">
 <head>
-  <script src="/js/jquery.min.js"></script>
-  <script type="text/javascript">
-      $(function(){
-          var flag = "${login}";
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>医患交互平台登录</title>
+	<link rel="stylesheet" type="text/css" href="/css/styles.css">
 
-          if(flag=="-1"){
-              $("#loginNoti").show();
-          }else{
-              $("#loginNoti").hide();
-          }
+		<script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+		<script src="/js/jquery.min.js"></script>
 
+	<script type="text/javascript">
+        $(function(){
+            var flag = "${login}";
 
-          $("select[name='userType']").change(function(){
-              var val = $("select[name='userType']").val();
-              if(val=="doctor"){
-                  $("form").attr("action","/doctor/login")
-              }else if(val=="patient" ){
-                  $("form").attr("action","/patient/login")
-              }else if(val=="admin"){
-                  $("form").attr("action","/admin/login")
-              }
-
-          });
-
-      })
+            if(flag=="-1"){
+                $("#loginNoti").show();
+            }else{
+                $("#loginNoti").hide();
+            }
 
 
+            $("select[name='userType']").change(function(){
+                var val = $("select[name='userType']").val();
+                if(val=="doctor"){
+                    $("form").attr("action","/doctor/login")
+                }else if(val=="patient" ){
+                    $("form").attr("action","/patient/login")
+                }else if(val=="admin"){
+                    $("form").attr("action","/admin/login")
+                }
+
+            });
+
+        })
 
 
-  </script>
-  <style type="text/css">
-    <!--
-    body {
-      margin-left: 0px;
-      margin-top: 0px;
-      margin-right: 0px;
-      margin-bottom: 0px;
-    }
-    -->
-  </style>
-  <link href="css/css.css" rel="stylesheet" type="text/css" />
-  <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
-
-  <c:if test="${!empty msg}">
-    <script>
-        alert('${msg}');
-    </script>
-  </c:if>
+	</script>
 </head>
+<body background="/images/loginbg.jpg">
+	<div class="jq22-container" style="padding-top:100px">
 
-<body>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td height="147" background="/images/top02.gif"><img src="/images/top03.gif" width="776" height="147" /></td>
-  </tr>
-</table>
-<table width="562" border="0" align="center" cellpadding="0" cellspacing="0" class="right-table03">
-  <tr>
-    <td width="221"><table width="95%" border="0" cellpadding="0" cellspacing="0" class="login-text01">
+		<div class="login-wrap">
 
-      <tr>
-        <td><table width="100%" border="0" cellpadding="0" cellspacing="0" class="login-text01">
-          <tr>
-            <td align="center"><img src="/images/ico13.gif" width="107" height="97" /></td>
-          </tr>
-          <tr>
-            <td height="40" align="center">&nbsp;</td>
-          </tr>
-
-        </table></td>
-        <td><img src="/images/line01.gif" width="5" height="292" /></td>
-      </tr>
-    </table></td>
-    <td>
-      <form action="/doctor/login" method="post">
-        <span align="left" class="login-text02">用户登录</span>
-        <div display="none" id="loginNoti" style="color: red;"> 密码或ID错误</div>
-
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="31%" height="35" class="login-text02">用户类型：<br /></td>
-            <td width="69%">
-              <select name="userType" style="width: 200px;">
-                <option value="doctor" selected>医生</option>
-                <option value="patient">病人</option>
-                <option value="admin">管理员</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td width="31%" height="35" class="login-text02">用户ID：<br /></td>
-            <td width="69%"><input name="id" type="text" size="30" value="1"/></td>
-          </tr>
-          <tr>
-            <td height="35" class="login-text02">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<br /></td>
-            <td><input name="pwd" type="password" size="31" value="xll"/></td>
-          </tr>
-          <tr>
-            <td height="35">&nbsp;</td>
-            <td><input name="Submit2" type="submit" class="right-button01" value="确认登陆"/>
-              <input name="Submit232" type="submit" class="right-button01" value="重新填写" style="margin-left: 20px"/></td>
-          </tr>
-        </table>
-      </form></td>
-  </tr>
-</table>
+			<div class="login-html">
+				<img src="/images/mini-logo.png" style="position: relative;bottom: 45px;right: 20px"/>
+				<font style="position: relative;bottom: 50px;font-size: 25px">医患互动信息系统登录</font>
+				<form action="/doctor/login" method="post">
+				<input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">登录</label>
+				<input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab"></label>
+				<div class="login-form">
+					<div class="sign-in-htm">
+						<div  id="loginNoti" style="display: none;color: red;"> 密码或ID错误</div>
+						<div class="group" style="display:inline">
+							<label for="user" class="label">用户类型</label>
+							 <select name="userType" class="input" style="">
+								<option style="background-color:rgba(40,57,101,.9)" value="doctor">医生</option>
+								<option style="background-color:rgba(40,57,101,.9)" value="patient">患者</option>
+								<option style="background-color:rgba(40,57,101,.9)" value="admin">管理员</option>
+							</select >
+						
+							<!--
+							<label for="user" class="label">医生</label>
+							<input id="user" name="type" type="radio" class="input" value="医生">患者<input id="user" name="type" type="radio" class="input" value="患者">
+							
+							管理员<input id="user" name="type" type="radio" class="input" value="管理员">-->
+						</div>
+						<div class="group">
+							<label for="user" class="label">用户ID</label>
+							<input id="user" name="id" type="text" class="input">
+						</div>
+						<div class="group">
+							<label for="pass" class="label">密码</label>
+							<input id="pass" name="pwd" type="password" class="input" data-type="password">
+						</div>
+						<!--  
+						<div class="group">
+							<input id="check" type="checkbox" class="check" checked>
+							<label for="check"><span class="icon"></span> Keep me Signed in</label>
+						</div>
+						-->
+						<div class="group">
+							<input type="submit" class="button" value="登录">
+						</div>
+						<div class="hr"></div>
+						<!--  -->
+						<!--  
+						<div class="foot-lnk">
+							<a href="#forgot">Forgot Password?</a>
+						</div>
+						-->
+					</div>
+					
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 </body>
 </html>

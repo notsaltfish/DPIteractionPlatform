@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * Created by chenyong on 2017/4/4.
+ * Created by X on 2017/4/4.
  */
 @Controller
 public class DepartmentController {

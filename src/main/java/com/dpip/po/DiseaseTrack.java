@@ -3,7 +3,7 @@ package com.dpip.po;
 import java.util.Date;
 
 /**
- * Created by chenyong on 2017-04-09.
+ * Created by X on 2017-04-09.
  */
 public class DiseaseTrack {
     private Integer id;

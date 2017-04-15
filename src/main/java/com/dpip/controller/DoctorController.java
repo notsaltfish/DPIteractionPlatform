@@ -14,7 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Created by chenyong on 2017/4/4.
+ * Created by X on 2017/4/4.
  */
 
 @Controller
@@ -39,7 +39,7 @@ public class DoctorController {
     public String login(Doctor doctor, Model model, HttpServletRequest request){
         if(doctor.getPwd()==null||doctor.getId()==null){
             model.addAttribute("login","-1");
-            return "/login2.jsp";
+            return "/login.jsp";
         }
         doctor.setPwd(MD5Util.MD5(doctor.getPwd()));
         System.out.println(doctor.getId()+"  "+doctor.getPwd());
@@ -48,7 +48,7 @@ public class DoctorController {
         model.addAttribute("login","1");
         if(doctor1==null){
             model.addAttribute("login","-1");
-            result="/login2.jsp";
+            result="/login.jsp";
         }else {
             request.getSession().setAttribute("role","doctor");
             request.getSession().setAttribute("user",doctor1);

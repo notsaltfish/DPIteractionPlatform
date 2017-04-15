@@ -1,7 +1,7 @@
 package com.dpip.vo;
 
 /**
- * Created by chenyong on 2017-04-09.
+ * Created by X on 2017-04-09.
  */
 public class StatisticValueObject {
     private String name;

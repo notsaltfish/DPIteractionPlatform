@@ -3,7 +3,7 @@ package com.dpip.po;
 import java.util.Date;
 
 /**
- * Created by chenyong on 2017/4/8.
+ * Created by X on 2017/4/8.
  */
 public class RandomInterview {
     private Integer id;

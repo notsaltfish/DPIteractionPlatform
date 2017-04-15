@@ -22,11 +22,10 @@
     </select>
 
     <select id="getCount" parameterType="com.dpip.po.MedicineHistory" resultType="int">
-       <!-- select count(*) from dp_patient
+        select count(*) from dp_medi_his
         WHERE 1=1
-        <if test="pName !=null"> and p_name like  '%${pName}%' </if>
-        <if test="departmentId !=null"> and department_id=#{departmentId}</if>
-        &lt;!&ndash;<if test="id !=null"> and id=#{id}</if>&ndash;&gt;-->
+        <if test="pId != null"> and  p_id=#{pId} </if>
+
     </select>
 
 

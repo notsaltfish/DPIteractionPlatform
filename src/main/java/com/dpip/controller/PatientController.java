@@ -1,13 +1,11 @@
 package com.dpip.controller;
 
 import com.dpip.po.*;
-import com.dpip.service.CommentService;
-import com.dpip.service.DoctorService;
-import com.dpip.service.LeaveMessageService;
-import com.dpip.service.PatientService;
+import com.dpip.service.*;
 import com.dpip.util.MD5Util;
 import com.dpip.util.Page;
 import com.dpip.util.ResponseData;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 /**
- * Created by chenyong on 2017/4/4.
+ * Created by X on 2017/4/4.
  */
 @Controller
 public class PatientController  {
@@ -32,18 +30,20 @@ public class PatientController  {
     private CommentService commentService;
     @Autowired
     private LeaveMessageService leaveMessageService;
+    @Autowired
+    private MedicineHistoryService medicineHistoryService;
 
     @RequestMapping("/patient/login")
     public String login(Model model,Patient patient,HttpServletRequest request ){
         if(patient.getPwd()==null||patient.getId()==null){
             model.addAttribute("login",-1);
-            return "/login2.jsp";
+            return "/login.jsp";
         }
         patient.setPwd(MD5Util.MD5(patient.getPwd()));
         List<Patient> datas=patientService.select(null,patient);
         if(datas.size()==0){
             model.addAttribute("login",-1);
-            return "/login2.jsp";
+            return "/login.jsp";
         }else{
             request.getSession().setAttribute("user",datas.get(0));
             request.getSession().setAttribute("role","patient");
@@ -221,5 +221,25 @@ public class PatientController  {
             result=1;
         }
         return  result;
+    }
+
+    @RequestMapping("/patient/tomediceinstruct")
+    public String toMedicineInstruction(){
+
+        return "/patient/medicineInstruction.jsp";
+    }
+
+    @ResponseBody
+    @RequestMapping("/patient/medicineinstruction")
+    public ResponseData medicineInstruction(Page page, HttpServletRequest request){
+       Patient patient = (Patient) request.getSession().getAttribute("user");
+       if(page.getPage()==0||page.getPageSize()==0){
+           page.setPage(1);
+           page.setPageSize(10);
+       }
+        PageHelper.startPage(page.getPage(),page.getPageSize());
+        ResponseData<MedicineHistory> datas = medicineHistoryService.selectAjax(patient.getId());
+        datas.setPage(page);
+        return datas;
     }
 }

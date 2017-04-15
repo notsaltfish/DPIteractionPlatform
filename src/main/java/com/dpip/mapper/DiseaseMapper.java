@@ -5,7 +5,7 @@ import com.dpip.po.Disease;
 import java.util.List;
 
 /**
- * Created by chenyong on 2017/4/5.
+ * Created by X on 2017/4/5.
  */
 public interface DiseaseMapper {
     public List<Disease> selectByName(Disease disease);

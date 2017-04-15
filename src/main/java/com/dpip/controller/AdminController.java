@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
- * Created by chenyong on 2017/4/4.
+ * Created by X on 2017/4/4.
  */
 @Controller
 public class AdminController {
@@ -33,13 +33,13 @@ public class AdminController {
     public String login(Model model,Admin admin,HttpServletRequest request ){
        if(admin.getId()==null||admin.getPwd()==null){
            model.addAttribute("login",-1);
-           return  "/login2.jsp";
+           return  "/login.jsp";
        }
         admin.setPwd(MD5Util.MD5(admin.getPwd()));
         List<Admin> datas=adminService.select(admin);
         if(datas.size()==0){
             model.addAttribute("login",-1);
-            return "/login2.jsp";
+            return "/login.jsp";
         }else{
             request.getSession().setAttribute("user",datas.get(0));
             request.getSession().setAttribute("role","admin");

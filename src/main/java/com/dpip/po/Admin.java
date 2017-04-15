@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.util.Date;
 
 /**
- * Created by chenyong on 2017/4/4.
+ * Created by X on 2017/4/4.
  */
 @JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 public class Admin {
