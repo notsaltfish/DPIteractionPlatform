@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/5.
+ * 病情跟踪类
  */
 
 @Service

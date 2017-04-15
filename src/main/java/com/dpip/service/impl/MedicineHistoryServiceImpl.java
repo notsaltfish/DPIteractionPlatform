@@ -12,6 +12,7 @@ import java.util.List;
 
 /**
  * Created by chenyong on 2017/4/4.
+ * 用药历史service
  */
 
 @Service
@@ -36,6 +37,11 @@ public class MedicineHistoryServiceImpl implements MedicineHistoryService {
         return medicineHistoryMapper.getCount(medicineHistory);
     }
 
+    /**
+     *根据患者id查询对应的用药历史
+     * @param id
+     * @return 返回查询到的数据
+     */
     @Override
     public ResponseData<MedicineHistory> selectAjax(Integer id) {
         ResponseData<MedicineHistory> datas = new ResponseData<MedicineHistory>();

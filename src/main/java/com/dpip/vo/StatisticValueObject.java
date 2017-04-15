@@ -2,6 +2,7 @@ package com.dpip.vo;
 
 /**
  * Created by X on 2017-04-09.
+ * 统计图表的类 就是一个键值对对象
  */
 public class StatisticValueObject {
     private String name;

@@ -3,6 +3,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017-04-09.
+ *统计图表类
  */
 public class StatisticObject {
     private String title;

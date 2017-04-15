@@ -4,6 +4,7 @@ import com.dpip.po.Doctor;
 import java.util.List;
 /**
  * Created by X on 2017/4/4.
+ * 医生Mapper
  */
 public interface DoctorMapper {
 

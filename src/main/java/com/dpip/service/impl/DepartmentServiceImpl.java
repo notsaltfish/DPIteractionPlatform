@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/5.
+ * 科室service类
  */
 
 @Service

@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 药物service
  */
 
 @Service
@@ -19,6 +20,11 @@ public class MedicineServiceImpl implements MedicineService {
     @Autowired
     private MedicineMapper medicineMapper;
 
+    /**
+     * 根据名字模糊查询药物列表数据
+     * @param medicine
+     * @return
+     */
     @Override
     public ResponseData<Medicine> selectByName(Medicine medicine) {
 

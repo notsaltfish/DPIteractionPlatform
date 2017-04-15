@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 管理员Mapper
  */
 public interface AdminMapper {
 

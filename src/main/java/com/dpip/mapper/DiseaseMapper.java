@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/5.
+ * 病种Mapper
  */
 public interface DiseaseMapper {
     public List<Disease> selectByName(Disease disease);

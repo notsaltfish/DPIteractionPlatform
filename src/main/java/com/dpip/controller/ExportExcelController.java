@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 导出excel的数据controller
  */
 @Controller
 public class ExportExcelController {
@@ -40,15 +42,29 @@ public class ExportExcelController {
     @Autowired
     private DepartmentService departmentService;
 
+    /**
+     * 点击前台的导出excel 然后 导出excel表格
+     * @param page 需要导出第几页数据
+     * @param patient 需要导出的病人的信息
+     * @param request
+     * @param response 将导出变成流 输出出去
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/excelExceport/patient")
-    public String patientExport(Page page,Patient patient,HttpServletRequest request
+    public void patientExport(Page page,Patient patient,HttpServletRequest request
                                                 ,HttpServletResponse response) throws  Exception{
+        //获取当前的项目绝对路径
         String path = request.getSession().getServletContext().getRealPath("/")+"excel/";
-
+        //获取要导出的excel模板信息
         InputStream is =  new FileInputStream(new File(path+"patientTemplate.xlsx"));
+        //兴建一个工作簿 也就是excel
         Workbook wb = new XSSFWorkbook(is);//不需要再new  Workbook 直接使用这个对象就可以
+        //创建一个sheet
         Sheet sh = wb.getSheetAt(0);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
+        //获取需要导出的患者数据
         List<Patient> data = patientService.select(page,patient);
         Row row = null;
         Cell cell = null;
@@ -60,10 +76,13 @@ public class ExportExcelController {
         for(int i=0;i<data.size();i++){
             colNum = 0;
             patient1 = data.get(i);
+            //用sheet创建一行
             row = sh.createRow(rowNum++);
+            //再用行创建一个单元格
             cell = row.createCell(colNum++);
+            //单元格设置患者的值
             cell .setCellValue(patient1.getName());
-
+//下面类似
             cell = row.createCell(colNum++);
             cell .setCellValue(patient1.getSex());
 
@@ -84,23 +103,24 @@ public class ExportExcelController {
             cell .setCellValue(patient1.getStatus());
 
             cell = row.createCell(colNum++);
-            cell .setCellValue(patient1.getHpDate());
+            cell .setCellValue(  format.format(patient1.getHpDate()));
 
         }
+        //将excel变成流输出到前端
       ByteArrayOutputStream out = new ByteArrayOutputStream();
         try {
+            //将excel写到字节输出流
             wb.write(out);
             out.close();
+            //使用专门封装的下载工具传输IO流
             DownloadUtil du = new DownloadUtil();
             du.download(out, response, "patientReport.xlsx");
-            out.close();
 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return  "/index.jsp";
     }
 
 }

@@ -1,9 +1,13 @@
 package com.dpip.util;
 
+/**
+ * 分页工具类
+ * @param <T>
+ */
 public class Page<T> {
-	private int page;
-	private int total;
-	private int pageSize;
+	private int page;//页码
+	private int total;//总的记录数
+	private int pageSize;//每页显示几条数据
 	private T entity;
 	private int startRow;
 	

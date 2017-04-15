@@ -8,6 +8,10 @@ import java.io.IOException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * 下载工具类
+ * 比如说下载excel
+ */
 public class DownloadUtil {
 	
 	/**
@@ -92,7 +96,7 @@ public class DownloadUtil {
 	}
 
 	/**
-	 * by tony 2013-10-17
+	 *
 	 * @param byteArrayOutputStream 将文件内容写入ByteArrayOutputStream
 	 * @param response HttpServletResponse	写入response
 	 * @param returnName 返回的文件名

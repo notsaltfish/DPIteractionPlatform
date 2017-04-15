@@ -2,6 +2,10 @@ package com.dpip.util;
 
 import java.util.List;
 
+/**
+ * ajax数据返回封装类 这样前台有统一的接口好处理
+ * @param <T>
+ */
 public class ResponseData<T> {
 	private int total;
 	private List<T> datas;

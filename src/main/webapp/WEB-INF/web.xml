@@ -7,7 +7,7 @@
   <display-name>Archetype Created Web Application</display-name>
 
   <welcome-file-list>
-    <welcome-file>/WEB-INF/view/login2.jsp</welcome-file>
+    <welcome-file>/WEB-INF/view/login.jsp</welcome-file>
   </welcome-file-list>
   <context-param>
     <param-name>contextConfigLocation</param-name>

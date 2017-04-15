@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 病情跟踪Mapper
  */
 public interface DiseaseTrackMapper {
 

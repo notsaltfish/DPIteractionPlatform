@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 患者Mapper
  */
 public interface PatientMapper {
 

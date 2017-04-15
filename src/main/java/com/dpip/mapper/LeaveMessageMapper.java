@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/5.
+ * 留言Mapper
  */
 public interface LeaveMessageMapper {
     public List<LeaveMessage> select(LeaveMessage leaveMessage);

@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by X on 2017/4/4.
+ * 评价service类
  */
 
 @Service
