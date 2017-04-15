@@ -80,7 +80,7 @@
                 $("#hiddenPageSize").val(pageSize);
                 $("form").submit();
                 var ptype="${pType}"
-                setTimeout("load();",3000)
+                //setTimeout("load();",3000)
                // $( parent.frames['leftFrame'].document).find('#patientHref2').click()
                 //  setTimeout("history.back()",3000)
                 //history.back()
